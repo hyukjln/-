@@ -1,0 +1,48 @@
+import random as rd
+
+# 시뮬레이션 반복 횟수
+N = 100000
+
+# 개별 반복 시의 결과를 저장할 리스트
+gi_1 = []
+
+# 평균 계산을 위한 변수 초기화
+result1 = 0
+
+# 함수 g(x) 정의
+def g(x):
+    return 3 * x**2
+
+# 10번 반복하여 시뮬레이션 수행
+for i in range(10):
+    sum = 0
+    # N번의 무작위 샘플을 이용하여 함수 g의 값을 합산
+    for i in range(N):
+        sum += g(rd.random())
+    # 평균 값을 계산하여 result1에 누적
+    result1 += sum / N
+    # 개별 결과를 리스트에 저장
+    gi_1.append(sum / N)
+
+# 10번 반복한 평균 값 계산
+avg_g1 = result1 / 10
+
+# 평균 값 출력
+print("uniform 방법 평균", avg_g1)
+
+# 분산 계산을 위한 변수 초기화
+sum_k = 0
+
+# 분산 계산
+for i in range(10):
+    k = (gi_1[i] - avg_g1)**2
+    sum_k += k
+
+# 분산 값 계산
+var1 = sum_k / 9
+
+# 분산 값 출력
+print("uniform 방법 분산", var1)
+
+# 개별 반복 결과 출력
+print(gi_1)
